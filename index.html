@@ -69,5 +69,84 @@ function applyLanguage(lang){
 languageSelect.addEventListener('change',()=>applyLanguage(languageSelect.value));
 
 let mode='offers';const routeSelect=document.getElementById('route');const fareBox=document.getElementById('fare');const fromInput=document.getElementById('from');const toInput=document.getElementById('to');function updateFare(){const lang=languageSelect.value;const opt=routeSelect.options[routeSelect.selectedIndex];if(opt&&opt.dataset.price){fareBox.textContent=(lang==='ka'?'სავარაუდო ღირებულება: ':lang==='en'?'Estimated price: ':'Ориентировочная стоимость: ')+opt.dataset.price+' ₾';fromInput.value=opt.dataset.from;toInput.value=opt.dataset.to;}else{fareBox.textContent=lang==='ka'?'სხვა მარშრუტის ფასი დაზუსტდება განაცხადის დადასტურებისას.':lang==='en'?'The price for other routes will be confirmed with your request.':'Для другого маршрута стоимость уточняется при подтверждении заявки.';}}routeSelect.addEventListener('change',updateFare);[fromInput,toInput].forEach(input=>input.addEventListener('input',()=>{if(routeSelect.value){routeSelect.value='';fareBox.textContent=languageSelect.value==='ka'?'მარშრუტი ხელით შეიცვალა. ფასი დაზუსტდება.':languageSelect.value==='en'?'Route changed manually. Price to be confirmed.':'Маршрут изменён вручную. Стоимость уточняется.';}}));document.querySelectorAll('.mode').forEach(el=>el.addEventListener('click',()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('selected'));el.classList.add('selected');mode=el.dataset.mode;}));
-document.getElementById('booking').addEventListener('submit',e=>{e.preventDefault();const opt=routeSelect.options[routeSelect.selectedIndex];const price=opt&&opt.dataset.price?opt.dataset.price+' ₾':'По согласованию';let d={from:fromInput.value,to:toInput.value,date:document.getElementById('date').value,time:document.getElementById('time').value,pax:document.getElementById('pax').value,vehicle:document.getElementById('vehicle').value,contact:document.getElementById('contact').value,notes:document.getElementById('notes').value,mode,price};let old=JSON.parse(localStorage.getItem('ct_requests')||'[]');old.push(d);localStorage.setItem('ct_requests',JSON.stringify(old));let message='Новая заявка — Caucasus Transfer\\n'+'Откуда: '+d.from+'\\nКуда: '+d.to+'\\nСтоимость: '+d.price+'\\nДата: '+d.date+'\\nВремя: '+d.time+'\\nПассажиры: '+d.pax+'\\nАвтомобиль: '+d.vehicle+'\\nСпособ: '+(d.mode==='offers'?'Предложения водителей':'Фиксированная цена')+'\\nТелефон клиента: '+d.contact+'\\nПожелания: '+(d.notes||'нет');let waUrl='https://wa.me/995599155166?text='+encodeURIComponent(message);let result=document.getElementById('result');result.classList.remove('hidden');result.innerHTML='Заявка подготовлена. WhatsApp должен открыться с заполненным сообщением. Нажмите там «Отправить». Если WhatsApp не открылся, <a href="'+waUrl+'" target="_blank" rel="noopener">нажмите здесь</a>.';window.open(waUrl,'_blank');});
-document.getElementById('driverForm').addEventListener('submit',e=>{e.preventDefault();const d={name:document.getElementById('driverName').value,phone:document.getElementById('driverPhone').value,car:document.getElementById('driverCar').value,seats:document.getElementById('driverSeats').value,city:document.getElementById('driverCity').value||'не указан'};const msg='Новая анкета водителя — Caucasus Transfer\\nИмя: '+d.name+'\\nТелефон: '+d.phone+'\\nАвтомобиль: '+d.car+'\\nПассажирских мест: '+d.seats+'\\nГород работы: '+d.city;const url='https://wa.me/995599155166?text='+encodeURIComponent(msg);const box=document.getElementById('driverResult');box.classList.remove('hidden');box.textContent='Анкета подготовлена. WhatsApp откроется с заполненным сообщением. Нажмите «Отправить».';window.open(url,'_blank');});</script></body></html>
+
+// Supabase: используем только публичный publishable key. Секретные ключи нельзя помещать в браузер.
+const SUPABASE_URL='https://bjftezshuqpvdknwrchy.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_PVKJP_3vSOEjBsvTaEbqmg_MqoCZEin';
+async function saveToSupabase(table, record){
+ const response=await fetch(SUPABASE_URL+'/rest/v1/'+table,{
+  method:'POST',
+  headers:{
+   'apikey':SUPABASE_PUBLISHABLE_KEY,
+   'Authorization':'Bearer '+SUPABASE_PUBLISHABLE_KEY,
+   'Content-Type':'application/json',
+   'Prefer':'return=minimal'
+  },
+  body:JSON.stringify(record)
+ });
+ if(!response.ok){const detail=await response.text();throw new Error('Supabase '+response.status+': '+detail);}
+}
+document.getElementById('booking').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const opt=routeSelect.options[routeSelect.selectedIndex];
+ const price=opt&&opt.dataset.price?Number(opt.dataset.price):null;
+ const d={
+  from:fromInput.value,to:toInput.value,
+  date:document.getElementById('date').value,
+  time:document.getElementById('time').value,
+  pax:document.getElementById('pax').value,
+  vehicle:document.getElementById('vehicle').value,
+  contact:document.getElementById('contact').value,
+  notes:document.getElementById('notes').value,mode,price
+ };
+ let old=JSON.parse(localStorage.getItem('ct_requests')||'[]');
+ old.push(d);localStorage.setItem('ct_requests',JSON.stringify(old));
+ const message='Новая заявка — Caucasus Transfer\\n'+'Откуда: '+d.from+'\\nКуда: '+d.to+'\\nСтоимость: '+(price===null?'По согласованию':price+' ₾')+'\\nДата: '+d.date+'\\nВремя: '+d.time+'\\nПассажиры: '+d.pax+'\\nАвтомобиль: '+d.vehicle+'\\nСпособ: '+(d.mode==='offers'?'Предложения водителей':'Фиксированная цена')+'\\nТелефон клиента: '+d.contact+'\\nПожелания: '+(d.notes||'нет');
+ const waUrl='https://wa.me/995599155166?text='+encodeURIComponent(message);
+ const result=document.getElementById('result');result.classList.remove('hidden');
+ // Открываем WhatsApp сразу, чтобы браузер не заблокировал окно после сетевого запроса.
+ window.open(waUrl,'_blank');
+ result.textContent='Отправляем заявку в систему... WhatsApp также открыт — нажмите там «Отправить».';
+ try{
+  await saveToSupabase('orders',{
+   customer_phone:d.contact,
+   from_location:d.from,
+   to_location:d.to,
+   travel_date:d.date,
+   travel_time:d.time,
+   passengers:Number(d.pax),
+   vehicle:d.vehicle,
+   price:price,
+   notes:d.notes||null
+  });
+  result.textContent='Заявка сохранена в системе Caucasus Transfer. Для уведомления нажмите «Отправить» в WhatsApp.';
+ }catch(error){
+  console.error(error);
+  result.textContent='Не удалось сохранить заявку в системе. WhatsApp открыт — нажмите «Отправить», чтобы мы получили заявку. Ошибка: '+error.message;
+ }
+});
+document.getElementById('driverForm').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const d={
+  name:document.getElementById('driverName').value,
+  phone:document.getElementById('driverPhone').value,
+  car:document.getElementById('driverCar').value,
+  seats:document.getElementById('driverSeats').value,
+  city:document.getElementById('driverCity').value||null
+ };
+ const msg='Новая анкета водителя — Caucasus Transfer\\nИмя: '+d.name+'\\nТелефон: '+d.phone+'\\nАвтомобиль: '+d.car+'\\nПассажирских мест: '+d.seats+'\\nГород работы: '+(d.city||'не указан');
+ const url='https://wa.me/995599155166?text='+encodeURIComponent(msg);
+ const box=document.getElementById('driverResult');box.classList.remove('hidden');
+ window.open(url,'_blank');
+ box.textContent='Отправляем анкету в систему... WhatsApp также открыт — нажмите там «Отправить».';
+ try{
+  await saveToSupabase('drivers',{
+   name:d.name,phone:d.phone,car:d.car,seats:d.seats,city:d.city,status:'pending'
+  });
+  box.textContent='Анкета сохранена. Статус водителя: ожидает подтверждения. Для уведомления нажмите «Отправить» в WhatsApp.';
+ }catch(error){
+  console.error(error);
+  box.textContent='Не удалось сохранить анкету в системе. WhatsApp открыт — нажмите «Отправить». Ошибка: '+error.message;
+ }
+});
+</script></body></html>
