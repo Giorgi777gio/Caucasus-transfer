@@ -65,7 +65,7 @@ $('loginBtn').addEventListener('click',async()=>{
  await verifyAndShow(data.user);
 });
 $('logoutBtn').addEventListener('click',async()=>{await client.auth.signOut();showLogin();});
-client.auth.onAuthStateChange((_event,session)=>{if(session?.user)verifyAndShow(session.user);else showLogin();});
+client.auth.getSession().then(({data,error})=>{if(error){message('loginMessage','Не удалось проверить вход: '+error.message);return;}if(data.session?.user)verifyAndShow(data.session.user);else showLogin();});
 async function refreshAll(){clearMessage('dashboardMessage');await Promise.all([loadDrivers(),loadOrders()]);}
 async function loadDrivers(){
  const box=$('driversList');box.replaceChildren();addText(box,'p','Загружаем анкеты…').className='muted';
