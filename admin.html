@@ -130,12 +130,23 @@ async function loadOrders(){
  });
 }
 async function saveOrder(id,driverId,status){
- const update={status};
- if(driverId)update.assigned_driver_id=Number(driverId);
- else update.assigned_driver_id=null;
- const {error}=await client.from('orders').update(update).eq('id',id);
- if(error){message('dashboardMessage','Не удалось сохранить заказ: '+error.message);return;}
+ if(!driverId){
+  message('dashboardMessage','Сначала выберите подтверждённого водителя.');
+  return;
+ }
+ message('dashboardMessage','Сохраняем назначение водителя и статус заказа…');
+ const update={status,assigned_driver_id:Number(driverId)};
+ const {data,error}=await client.from('orders').update(update).eq('id',id).select('id,status,assigned_driver_id');
+ if(error){
+  message('dashboardMessage','Ошибка сохранения заказа: '+error.message);
+  return;
+ }
+ if(!data||data.length===0){
+  message('dashboardMessage','Заказ не обновлён. Проверьте права UPDATE для таблицы orders в Supabase.');
+  return;
+ }
  await refreshAll();
+ message('dashboardMessage','Готово! Водитель назначен, статус заказа: '+data[0].status+'.');
 }
 $('refreshDrivers').addEventListener('click',loadDrivers);
 $('refreshOrders').addEventListener('click',loadOrders);
