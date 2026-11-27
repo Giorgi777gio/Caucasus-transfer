@@ -108,6 +108,11 @@ async function loadOrders(){
  ]);
  box.replaceChildren();if(error){addText(box,'p','Ошибка загрузки заказов: '+error.message).className='empty';return;}
  if(driverError){addText(box,'p','Не удалось загрузить список подтверждённых водителей: '+driverError.message).className='empty';return;}
+ if(!drivers.length){
+  addText(box,'p','Водители со статусом approved не найдены. Проверьте статус анкеты в разделе Drivers.').className='empty';
+ } else {
+  addText(box,'p','Подтверждённых водителей найдено: '+drivers.length).className='muted';
+ }
  if(!orders.length){addText(box,'p','Пока нет заказов.').className='empty';return;}
  orders.forEach(o=>{
   const card=document.createElement('article');card.className='item';
