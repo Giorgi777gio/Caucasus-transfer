@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10283d">
+<title>Администратор · Caucasus Transfer</title>
+<style>
+:root{--navy:#10283d;--blue:#1e5878;--gold:#e7b85c;--ink:#172532;--muted:#657482;--bg:#f3f6f8}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,Arial,sans-serif}
+header{background:var(--navy);color:#fff;padding:20px}header div,main{max-width:960px;margin:auto}
+main{padding:24px 16px 50px}.panel,.item{background:#fff;border:1px solid #e1e8ed;border-radius:14px;padding:18px;margin:0 0 16px}
+h1{font-size:23px;margin:0}h2{font-size:19px;margin:0 0 14px}.muted{color:var(--muted);font-size:14px}
+label{display:block;font-size:13px;font-weight:650;color:var(--muted);margin:10px 0 5px}
+input,select{width:100%;padding:12px;border:1px solid #ccd7df;border-radius:9px;font:inherit;background:#fff}
+button{border:0;border-radius:9px;padding:11px 15px;font:inherit;font-weight:750;cursor:pointer;background:var(--gold);color:#182b39;margin:10px 8px 0 0}
+button.secondary{background:#e8eef2}button.danger{background:#f8e5e3;color:#842d27}
+.hidden{display:none!important}.notice{padding:12px;border-radius:9px;background:#fff8e9;margin:12px 0;white-space:pre-wrap}
+.item{display:grid;gap:7px}.item strong{color:var(--navy)}.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}@media(max-width:600px){.row{grid-template-columns:1fr}}
+.topline{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+small{color:var(--muted)}.empty{color:var(--muted);padding:12px 0}
+</style>
+</head>
+<body>
+<header><div><h1>CAUCASUS TRANSFER · Администратор</h1><div class="muted" style="color:#d5e1e8">Закрытая панель управления</div></div></header>
+<main>
+<section id="loginPanel" class="panel">
+<h2>Вход администратора</h2>
+<p class="muted">Войдите с email и паролем, созданными в Supabase.</p>
+<label for="email">Email</label><input id="email" type="email" autocomplete="username" value="Giorgi1972gio@gmail.com">
+<label for="password">Пароль</label><input id="password" type="password" autocomplete="current-password" placeholder="Ваш пароль">
+<button id="loginBtn">Войти</button>
+<div id="loginMessage" class="notice hidden" role="status"></div>
+</section>
+<section id="dashboard" class="hidden">
+<div class="panel topline"><div><strong id="signedInAs"></strong><div class="muted">Доступ только для администратора</div></div><button id="logoutBtn" class="secondary">Выйти</button></div>
+<section class="panel"><div class="topline"><h2>Анкеты водителей</h2><button id="refreshDrivers" class="secondary">Обновить</button></div><div id="driversList"></div></section>
+<section class="panel"><div class="topline"><h2>Заказы клиентов</h2><button id="refreshOrders" class="secondary">Обновить</button></div><div id="ordersList"></div></section>
+<div id="dashboardMessage" class="notice hidden" role="status"></div>
+</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL='https://bjftezshuqpvdknwrchy.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_PVKJP_3vSOEjBsvTaEbqmg_MqoCZEin';
+const ADMIN_ID='f2f0d265-0996-4519-bf96-1a5a32ff4339';
+const client=window.supabase.createClient(SUPABASE_URL,SUPABASE_PUBLISHABLE_KEY);
+const $=id=>document.getElementById(id);
+function message(id,text){const el=$(id);el.textContent=text;el.classList.remove('hidden')}
+function clearMessage(id){$(id).textContent='';$(id).classList.add('hidden')}
+function addText(parent,tag,text){const el=document.createElement(tag);el.textContent=text??'—';parent.appendChild(el);return el}
+function addButton(parent,text,cls,handler){const b=document.createElement('button');b.textContent=text;if(cls)b.className=cls;b.addEventListener('click',handler);parent.appendChild(b);return b}
+function showDashboard(user){$('loginPanel').classList.add('hidden');$('dashboard').classList.remove('hidden');$('signedInAs').textContent=user.email||'Администратор';}
+function showLogin(){ $('dashboard').classList.add('hidden');$('loginPanel').classList.remove('hidden'); }
+async function verifyAndShow(user){
+ if(!user||user.id!==ADMIN_ID){await client.auth.signOut();showLogin();message('loginMessage','Доступ запрещён: этот аккаунт не является администратором.');return false;}
+ clearMessage('loginMessage');showDashboard(user);await refreshAll();return true;
+}
+$('loginBtn').addEventListener('click',async()=>{
+ clearMessage('loginMessage');$('loginBtn').disabled=true;
+ const {data,error}=await client.auth.signInWithPassword({email:$('email').value.trim(),password:$('password').value});
+ $('loginBtn').disabled=false;
+ if(error){message('loginMessage','Не удалось войти: '+error.message);return;}
+ await verifyAndShow(data.user);
+});
+$('logoutBtn').addEventListener('click',async()=>{await client.auth.signOut();showLogin();});
+client.auth.onAuthStateChange((_event,session)=>{if(session?.user)verifyAndShow(session.user);else showLogin();});
+async function refreshAll(){clearMessage('dashboardMessage');await Promise.all([loadDrivers(),loadOrders()]);}
+async function loadDrivers(){
+ const box=$('driversList');box.replaceChildren();addText(box,'p','Загружаем анкеты…').className='muted';
+ const {data,error}=await client.from('drivers').select('id,name,phone,car,seats,city,status,created_at').order('created_at',{ascending:false});
+ box.replaceChildren();if(error){addText(box,'p','Ошибка загрузки: '+error.message).className='empty';return;}
+ if(!data.length){addText(box,'p','Пока нет анкет водителей.').className='empty';return;}
+ data.forEach(d=>{
+  const card=document.createElement('article');card.className='item';
+  addText(card,'strong',(d.name||'Без имени')+' · '+(d.status||'без статуса'));
+  addText(card,'div','Телефон: '+(d.phone||'—'));addText(card,'div','Автомобиль: '+(d.car||'—')+' · Мест: '+(d.seats||'—'));
+  addText(card,'div','Город: '+(d.city||'—'));
+  const actions=document.createElement('div');actions.className='actions';card.appendChild(actions);
+  addButton(actions,'Подтвердить','',()=>updateDriver(d.id,'approved'));
+  addButton(actions,'Отклонить','danger',()=>updateDriver(d.id,'rejected'));
+  box.appendChild(card);
+ });
+}
+async function updateDriver(id,status){
+ const {error}=await client.from('drivers').update({status}).eq('id',id);
+ if(error){message('dashboardMessage','Не удалось изменить статус водителя: '+error.message);return;}
+ await refreshAll();
+}
+async function loadOrders(){
+ const box=$('ordersList');box.replaceChildren();addText(box,'p','Загружаем заказы…').className='muted';
+ const [{data:orders,error},{data:drivers, error:driverError}]=await Promise.all([
+  client.from('orders').select('id,customer_phone,from_location,to_location,travel_date,travel_time,passengers,vehicle,price,notes,status,assigned_driver_id,created_at').order('created_at',{ascending:false}),
+  client.from('drivers').select('id,name,phone,car,status').eq('status','approved').order('name')
+ ]);
+ box.replaceChildren();if(error){addText(box,'p','Ошибка загрузки заказов: '+error.message).className='empty';return;}
+ if(driverError){addText(box,'p','Не удалось загрузить список подтверждённых водителей: '+driverError.message).className='empty';return;}
+ if(!orders.length){addText(box,'p','Пока нет заказов.').className='empty';return;}
+ orders.forEach(o=>{
+  const card=document.createElement('article');card.className='item';
+  addText(card,'strong','Заказ №'+o.id+' · '+(o.status||'новый'));
+  addText(card,'div','Маршрут: '+(o.from_location||'—')+' → '+(o.to_location||'—'));
+  addText(card,'div','Дата и время: '+(o.travel_date||'—')+' '+(o.travel_time||''));
+  addText(card,'div','Клиент: '+(o.customer_phone||'—')+' · Пассажиров: '+(o.passengers??'—'));
+  addText(card,'div','Автомобиль: '+(o.vehicle||'—')+' · Цена: '+(o.price??'по согласованию'));
+  if(o.notes)addText(card,'div','Пожелания: '+o.notes);
+  const row=document.createElement('div');row.className='row';card.appendChild(row);
+  const select=document.createElement('select');select.setAttribute('aria-label','Выбрать водителя');
+  const first=document.createElement('option');first.value='';first.textContent='Выберите подтверждённого водителя';select.appendChild(first);
+  drivers.forEach(d=>{const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name+' · '+d.car+' · '+d.phone;if(String(d.id)===String(o.assigned_driver_id))opt.selected=true;select.appendChild(opt);});
+  row.appendChild(select);
+  const status=document.createElement('select');status.setAttribute('aria-label','Статус заказа');
+  [['new','Новый'],['assigned','Назначен водитель'],['completed','Завершён'],['cancelled','Отменён']].forEach(([v,t])=>{const opt=document.createElement('option');opt.value=v;opt.textContent=t;if((o.status||'new')===v)opt.selected=true;status.appendChild(opt);});
+  row.appendChild(status);
+  addButton(card,'Сохранить заказ','',()=>saveOrder(o.id,select.value,status.value));
+  box.appendChild(card);
+ });
+}
+async function saveOrder(id,driverId,status){
+ const update={status};
+ if(driverId)update.assigned_driver_id=Number(driverId);
+ else update.assigned_driver_id=null;
+ const {error}=await client.from('orders').update(update).eq('id',id);
+ if(error){message('dashboardMessage','Не удалось сохранить заказ: '+error.message);return;}
+ await refreshAll();
+}
+$('refreshDrivers').addEventListener('click',loadDrivers);
+$('refreshOrders').addEventListener('click',loadOrders);
+</script>
+</body>
+</html>
