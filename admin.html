@@ -104,14 +104,16 @@ async function loadOrders(){
  const box=$('ordersList');box.replaceChildren();addText(box,'p','Загружаем заказы…').className='muted';
  const [{data:orders,error},{data:drivers, error:driverError}]=await Promise.all([
   client.from('orders').select('id,customer_phone,from_location,to_location,travel_date,travel_time,passengers,vehicle,price,notes,status,assigned_driver_id,created_at').order('created_at',{ascending:false}),
-  client.from('drivers').select('id,name,phone,car,status').eq('status','approved').order('name')
+  client.from('drivers').select('id,name,phone,car,status').order('name')
  ]);
  box.replaceChildren();if(error){addText(box,'p','Ошибка загрузки заказов: '+error.message).className='empty';return;}
- if(driverError){addText(box,'p','Не удалось загрузить список подтверждённых водителей: '+driverError.message).className='empty';return;}
- if(!drivers.length){
-  addText(box,'p','Водители со статусом approved не найдены. Проверьте статус анкеты в разделе Drivers.').className='empty';
+ if(driverError){addText(box,'p','Не удалось загрузить список водителей: '+driverError.message).className='empty';return;}
+ const approvedDrivers=(drivers||[]).filter(d=>String(d.status||'').trim().toLowerCase()==='approved');
+ if(!approvedDrivers.length){
+  const statuses=(drivers||[]).map(d=>(d.name||'Без имени')+': '+(d.status||'без статуса')).join(' | ');
+  addText(box,'p','Подтверждённых водителей найдено: 0. Найдены анкеты: '+(drivers||[]).length+'. Статусы: '+(statuses||'нет анкет')).className='empty';
  } else {
-  addText(box,'p','Подтверждённых водителей найдено: '+drivers.length).className='muted';
+  addText(box,'p','Подтверждённых водителей найдено: '+approvedDrivers.length).className='muted';
  }
  if(!orders.length){addText(box,'p','Пока нет заказов.').className='empty';return;}
  orders.forEach(o=>{
@@ -125,7 +127,7 @@ async function loadOrders(){
   const row=document.createElement('div');row.className='row';card.appendChild(row);
   const select=document.createElement('select');select.setAttribute('aria-label','Выбрать водителя');
   const first=document.createElement('option');first.value='';first.textContent='Выберите подтверждённого водителя';select.appendChild(first);
-  drivers.forEach(d=>{const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name+' · '+d.car+' · '+d.phone;if(String(d.id)===String(o.assigned_driver_id))opt.selected=true;select.appendChild(opt);});
+  approvedDrivers.forEach(d=>{const opt=document.createElement('option');opt.value=d.id;opt.textContent=d.name+' · '+d.car+' · '+d.phone;if(String(d.id)===String(o.assigned_driver_id))opt.selected=true;select.appendChild(opt);});
   row.appendChild(select);
   const status=document.createElement('select');status.setAttribute('aria-label','Статус заказа');
   [['new','Новый'],['assigned','Назначен водитель'],['completed','Завершён'],['cancelled','Отменён']].forEach(([v,t])=>{const opt=document.createElement('option');opt.value=v;opt.textContent=t;if((o.status||'new')===v)opt.selected=true;status.appendChild(opt);});
