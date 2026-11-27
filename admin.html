@@ -84,9 +84,21 @@ async function loadDrivers(){
  });
 }
 async function updateDriver(id,status){
- const {error}=await client.from('drivers').update({status}).eq('id',id);
- if(error){message('dashboardMessage','Не удалось изменить статус водителя: '+error.message);return;}
+ const box=$('dashboardMessage');
+ message('dashboardMessage','Сохраняем статус водителя…');
+ box.scrollIntoView({behavior:'smooth',block:'center'});
+ const {data,error}=await client.from('drivers').update({status}).eq('id',id).select('id,status');
+ if(error){
+  message('dashboardMessage','Ошибка сохранения статуса: '+error.message);
+  return;
+ }
+ if(!data||data.length===0){
+  message('dashboardMessage','Запрос выполнен, но ни одна анкета не обновлена. Проверьте права UPDATE в Supabase.');
+  return;
+ }
+ message('dashboardMessage','Готово! Статус водителя изменён на: '+data[0].status);
  await refreshAll();
+ message('dashboardMessage','Готово! Статус водителя изменён на: '+data[0].status);
 }
 async function loadOrders(){
  const box=$('ordersList');box.replaceChildren();addText(box,'p','Загружаем заказы…').className='muted';
