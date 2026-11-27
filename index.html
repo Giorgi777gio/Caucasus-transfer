@@ -188,10 +188,10 @@ document.getElementById('driverForm').addEventListener('submit', async e => {
    options:{ emailRedirectTo:window.location.origin + window.location.pathname, data:profile }
   });
   if (error) throw error;
-  if (data.session && data.user) {
-   await ensureDriverProfile(data.user);
-  } else {
+  if (!data.session) {
    showDriverMessage('Почти готово! Откройте письмо от Supabase на ' + email + ' и нажмите ссылку подтверждения. После подтверждения вернитесь на сайт и войдите через форму ниже.');
+  } else {
+   showDriverMessage('Аккаунт создан. Загружаем вашу анкету...');
   }
  } catch(error) {
   console.error(error);
@@ -207,7 +207,7 @@ document.getElementById('driverLoginForm').addEventListener('submit', async e =>
   const { data, error } = await authClient.auth.signInWithPassword({email,password});
   if (error) throw error;
   if (!data.user) throw new Error('Не удалось получить аккаунт пользователя.');
-  await ensureDriverProfile(data.user);
+  showDriverMessage('Вход выполнен. Загружаем вашу анкету...');
  } catch(error) {
   console.error(error);
   showDriverMessage('Не удалось войти: ' + (error.message || 'проверьте почту и пароль'), true);
