@@ -25,7 +25,8 @@
 <div class="field"><label for="loginPassword">Пароль</label><input id="loginPassword" type="password" required autocomplete="current-password" placeholder="Ваш пароль"></div>
 </div><button type="submit">Войти в аккаунт водителя</button></form>
 <button id="driverLogout" type="button" class="hidden">Выйти</button>
-</div></div></section><section id="adminSection" class="driver-section hidden"><div class="driver-panel"><h2>Панель администратора</h2><p class="muted">Заявки водителей, ожидающие подтверждения.</p><button id="refreshDrivers" type="button">Обновить список</button><div id="adminResult" class="notice hidden"></div><div id="driverApplications"></div></div></section><footer>CAUCASUS TRANSFER · Georgia</footer>
+</div></div></section><section id="driverOrdersSection" class="driver-section hidden"><div class="driver-panel"><h2>Кабинет водителя</h2><div id="driverOrdersMessage" class="notice"></div><button id="refreshOrders" type="button">Обновить заказы</button><div id="availableOrders"></div></div></section>
+<section id="adminSection" class="driver-section hidden"><div class="driver-panel"><h2>Панель администратора</h2><p class="muted">Заявки водителей, ожидающие подтверждения.</p><button id="refreshDrivers" type="button">Обновить список</button><div id="adminResult" class="notice hidden"></div><div id="driverApplications"></div></div></section><footer>CAUCASUS TRANSFER · Georgia</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
@@ -164,6 +165,63 @@ function showAdminMessage(message, isError=false) {
 function escapeHtml(value) {
  return String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
+
+const driverOrdersSection = document.getElementById('driverOrdersSection');
+const driverOrdersMessage = document.getElementById('driverOrdersMessage');
+const availableOrdersBox = document.getElementById('availableOrders');
+async function loadDriverOrders() {
+ const {data:{user}} = await authClient.auth.getUser();
+ if (!user) { driverOrdersSection.classList.add('hidden'); return; }
+ const {data:driver,error:driverError} = await authClient.from('drivers')
+  .select('id,name,status,approved').eq('user_id',user.id).maybeSingle();
+ if (driverError) { driverOrdersSection.classList.remove('hidden'); driverOrdersMessage.textContent='Не удалось проверить анкету: '+driverError.message; return; }
+ if (!driver) { driverOrdersSection.classList.add('hidden'); return; }
+ driverOrdersSection.classList.remove('hidden');
+ if (!driver.approved) {
+  availableOrdersBox.innerHTML='';
+  driverOrdersMessage.textContent = driver.status === 'rejected'
+   ? 'Ваша анкета отклонена. Свяжитесь с администратором.'
+   : 'Ваша анкета ожидает подтверждения администратора. После одобрения здесь появятся свободные заказы.';
+  return;
+ }
+ driverOrdersMessage.textContent='Здравствуйте, '+(driver.name || 'водитель')+'. Ниже свободные заказы и ваши назначенные заказы.';
+ const {data:orders,error} = await authClient.from('orders')
+  .select('id,from_location,to_location,travel_date,travel_time,passengers,vehicle,price,notes,status,assigned_driver_id')
+  .or('status.eq.open,assigned_driver_id.eq.'+driver.id)
+  .order('travel_date',{ascending:true});
+ if (error) { availableOrdersBox.innerHTML=''; driverOrdersMessage.textContent='Не удалось загрузить заказы: '+error.message; return; }
+ if (!orders || !orders.length) { availableOrdersBox.innerHTML='<p class="muted">Пока свободных заказов нет.</p>'; return; }
+ availableOrdersBox.innerHTML=orders.map(o=>{
+  const mine=Number(o.assigned_driver_id)===Number(driver.id);
+  return `<article class="vehicle-card" style="margin-top:12px">
+   <h3>${escapeHtml(o.from_location)} → ${escapeHtml(o.to_location)}</h3>
+   <p>Дата: ${escapeHtml(o.travel_date)} · Время: ${escapeHtml(o.travel_time)}</p>
+   <p>Пассажиры: ${escapeHtml(o.passengers)} · Автомобиль: ${escapeHtml(o.vehicle)}</p>
+   <p>Цена: ${o.price==null?'По согласованию':escapeHtml(o.price)+' ₾'}</p>
+   <p>Телефон клиента: ${escapeHtml(o.customer_phone || 'не указан')}</p>
+   <p>Пожелания: ${escapeHtml(o.notes || 'нет')}</p>
+   <p><b>Статус: ${mine?'Назначен вам':escapeHtml(o.status || 'свободен')}</b></p>
+   ${mine?'': '<button type="button" data-claim-order="'+o.id+'">Принять заказ</button>'}
+  </article>`;
+ }).join('');
+}
+availableOrdersBox.addEventListener('click',async e=>{
+ const id=e.target.closest('[data-claim-order]')?.dataset.claimOrder;
+ if(!id)return;
+ e.target.disabled=true;
+ const {data:{user}}=await authClient.auth.getUser();
+ const {data:driver,error:driverError}=await authClient.from('drivers').select('id,approved').eq('user_id',user.id).maybeSingle();
+ if(driverError||!driver||!driver.approved){driverOrdersMessage.textContent='Не удалось проверить подтверждение водителя.';await loadDriverOrders();return;}
+ const {data,error}=await authClient.from('orders').update({
+  status:'assigned',assigned_driver_id:driver.id,assigned_at:new Date().toISOString()
+ }).eq('id',id).eq('status','open').is('assigned_driver_id',null).select('id');
+ if(error){driverOrdersMessage.textContent='Не удалось принять заказ: '+error.message;}
+ else if(!data||!data.length){driverOrdersMessage.textContent='Этот заказ уже принял другой водитель. Обновите список.';}
+ else{driverOrdersMessage.textContent='Заказ закреплён за вами!';}
+ await loadDriverOrders();
+});
+document.getElementById('refreshOrders').addEventListener('click',loadDriverOrders);
+
 async function loadDriverApplications() {
  const {data:{user}} = await authClient.auth.getUser();
  if (!user || (user.email || '').toLowerCase() !== ADMIN_EMAIL) {
@@ -268,6 +326,7 @@ logoutButton.addEventListener('click', async () => {
  else {logoutButton.classList.add('hidden');showDriverMessage('Вы вышли из аккаунта.');}
 });
 authClient.auth.onAuthStateChange(async (event, session) => {\n loadDriverApplications().catch(error => showAdminMessage(error.message,true));
+ loadDriverOrders().catch(error => { driverOrdersSection.classList.remove('hidden'); driverOrdersMessage.textContent=error.message; });
  if (event === 'SIGNED_IN' && session && session.user) {
   try { await ensureDriverProfile(session.user); }
   catch(error) { console.error(error); showDriverMessage('Вход выполнен, но не удалось загрузить анкету: '+error.message,true); }
