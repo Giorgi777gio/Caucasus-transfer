@@ -1,0 +1,21 @@
+{
+  "id": "./",
+  "name": "Caucasus Transfer",
+  "short_name": "Caucasus",
+  "description": "Book transfers across Georgia and the Caucasus.",
+  "lang": "ka",
+  "start_url": "./?source=installed-app",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#10283d",
+  "theme_color": "#10283d",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
