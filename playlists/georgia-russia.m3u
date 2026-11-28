@@ -1,0 +1,72 @@
+#EXTM3U
+# Caucasus Transfer — Georgia + Russian-language TV
+# Publicly listed streams; availability and regional restrictions can change.
+# Georgian channels
+#EXTINF:-1 tvg-id="1TV.ge@SD" group-title="🇬🇪 Грузинские каналы",1TV Georgia (720p)
+https://tv.cdn.xsg.ge/gpb-1tv/index.m3u8
+#EXTINF:-1 tvg-id="2TV.ge@SD" group-title="🇬🇪 Грузинские каналы",2TV Georgia (720p)
+https://tv.cdn.xsg.ge/gpb-2tv/index.m3u8
+#EXTINF:-1 tvg-id="ApsuaTV.ge@SD" group-title="🇬🇪 Грузинские каналы",Apsua TV (1080p)
+https://gcmx3v3owcj.a.trbcdn.net/livemaster/ba7pu_fgej0zelpw.smil/playlist.m3u8?blstid=null
+#EXTINF:-1 tvg-id="BMGTV.ge@SD" group-title="🇬🇪 Грузинские каналы",BMG TV
+https://tv.nucast.tv/lb/ge/bmg/index.m3u8
+#EXTINF:-1 tvg-id="Ertsulovneba.ge@SD" group-title="🇬🇪 Грузинские каналы",Ertsulovneba
+https://stream.sstv.ge/live/sstv/playlist.m3u8
+#EXTINF:-1 tvg-id="EuronewsGeorgia.ge@SD" group-title="🇬🇪 Грузинские каналы",Euronews Georgia
+http://nue01-edge01.itdc.ge/euronewsgeorgia/mpegts
+#EXTINF:-1 tvg-id="Formula.ge@SD" group-title="🇬🇪 Грузинские каналы",Formula (1080p)
+https://c4635.cdn.xsg.ge/c4635/TVFormula/index.m3u8
+#EXTINF:-1 tvg-id="ImediTV.ge@SD" group-title="🇬🇪 Грузинские каналы",Imedi TV (1080p)
+https://tv.cdn.xsg.ge/imedihd/index.m3u8
+#EXTINF:-1 tvg-id="PalitraNews.ge@SD" group-title="🇬🇪 Грузинские каналы",Palitra News (может быть не круглосуточно)
+https://live.palitranews.ge/hls/palitratv/index.m3u8
+#EXTINF:-1 tvg-id="RioniTV.ge@SD" group-title="🇬🇪 Грузинские каналы",Rioni TV (может быть не круглосуточно)
+http://video.rionitv.com/hls/live/rioni.m3u8
+#EXTINF:-1 tvg-id="Rustavi2.ge@SD" group-title="🇬🇪 Грузинские каналы",Rustavi 2
+http://nue01-edge01.itdc.ge/rustavi2hqnew/mpegts
+#EXTINF:-1 tvg-id="TVPirveli.ge@SD" group-title="🇬🇪 Грузинские каналы",TV Pirveli
+http://nue01-edge01.itdc.ge/pirvelitv/mpegts
+#EXTINF:-1 tvg-id="AbazaTV.ru@SD" group-title="🇬🇪 Грузинские каналы",Abaza TV
+https://public.apsny.camera/tv_abaza_tv_to_site/index.m3u8
+
+# Russian-language general channels
+#EXTINF:-1 tvg-id="360.ru@SD" group-title="🇷🇺 Русские каналы",360°
+https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8
+#EXTINF:-1 tvg-id="ChannelOneCIS.ru@SD" group-title="🇷🇺 Русские каналы",Первый канал СНГ
+https://fs.uplink.kz/perviy_kanal_sng/mono.m3u8?token=onlinetv
+#EXTINF:-1 tvg-id="Mir.ru@SD" group-title="🇷🇺 Русские каналы",МИР
+https://stream8.cinerama.uz/1218/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Mir24.ru@SD" group-title="🇷🇺 Русские каналы",МИР 24
+https://stream8.cinerama.uz/1219/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="NTV.ru@HD" group-title="🇷🇺 Русские каналы",НТВ HD
+https://cdn-dvr.ntv.ru/ntv0_hd/index.m3u8
+#EXTINF:-1 tvg-id="NTVVitrina.ru@SD" group-title="🇷🇺 Русские каналы",НТВ Витрина
+https://cdn.ntv.ru/vitrina/index.m3u8
+#EXTINF:-1 tvg-id="RENTV.ru@SD" group-title="🇷🇺 Русские каналы",РЕН ТВ
+http://flussonic.linkintel.ru/ren_tv/index.m3u8
+#EXTINF:-1 tvg-id="STS.ru@SD" group-title="🇷🇺 Русские каналы",СТС
+http://flussonic.linkintel.ru/sts/index.m3u8
+#EXTINF:-1 tvg-id="TNT.ru@SD" group-title="🇷🇺 Русские каналы",ТНТ
+http://flussonic.linkintel.ru/tnt/index.m3u8
+#EXTINF:-1 tvg-id="Carousel.ru@SD" group-title="🇷🇺 Русские каналы",Карусель
+https://stream.smotrim.ru/hls2/karusel/playlist_3.m3u8
+#EXTINF:-1 tvg-id="2x2.ru@SD" group-title="🇷🇺 Русские каналы",2x2
+http://s7.merlive.am/2x2/index.m3u8
+#EXTINF:-1 tvg-id="1HDMusicTelevision.ru@HD" group-title="🇷🇺 Русские каналы",1HD Music
+https://stream8.cinerama.uz/1267/tracks-v1a1/mono.m3u8
+
+# Russian-language movies and series
+#EXTINF:-1 tvg-id="Cinema.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Cinema
+https://stream8.cinerama.uz/1227/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Domkino.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Дом кино
+https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="Evrokino.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Еврокино
+http://176.118.197.101/Evrokino/index.m3u8
+#EXTINF:-1 tvg-id="365daysTV.ru@SD" group-title="🎬 Фильмы и сериалы на русском",365 дней ТВ
+http://stream.mcquack.net/70/index.m3u8
+#EXTINF:-1 tvg-id="NTVSeries.ru@SD" group-title="🎬 Фильмы и сериалы на русском",НТВ Сериал
+http://s7.merlive.am/NTVSerial/index.m3u8
+#EXTINF:-1 tvg-id="MirSeriala.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Мир сериала
+http://176.118.197.101/MirSeriala/index.m3u8
+#EXTINF:-1 tvg-id="NTVHit.ru@SD" group-title="🎬 Фильмы и сериалы на русском",НТВ Хит
+http://s7.merlive.am/ntvxit/index.m3u8
