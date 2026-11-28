@@ -124,7 +124,7 @@ function applyLanguage(lang){
  document.documentElement.lang=lang;
  document.documentElement.dir=lang==='ar'?'rtl':'ltr';
  document.title='Caucasus Transfer';
- const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);
+ const walker=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,{acceptNode(node){const parent=node.parentElement;if(parent&&parent.closest('script,style,noscript,textarea'))return NodeFilter.FILTER_REJECT;return NodeFilter.FILTER_ACCEPT;}});
  let node;
  while(node=walker.nextNode()){
   if(!node.__originalText) node.__originalText=node.nodeValue;
@@ -137,8 +137,7 @@ function applyLanguage(lang){
   el.placeholder=map[p]||p;
  });
 }
-const languageObserver=new MutationObserver(()=>applyLanguage(languageSelect.value));
-languageObserver.observe(document.body,{childList:true,subtree:true});
+// Automatic DOM-wide translation observer disabled to prevent browser lockups.
 
 const languageSetupVersion='2';
 if(localStorage.getItem('ct_language_setup')!==languageSetupVersion){localStorage.setItem('ct_language','ka');localStorage.setItem('ct_language_setup',languageSetupVersion);}
