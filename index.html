@@ -138,7 +138,7 @@ function applyLanguage(lang){
  });
 }
 const languageObserver=new MutationObserver(()=>applyLanguage(languageSelect.value));
-languageObserver.observe(document.body,{childList:true,subtree:true,characterData:true});
+languageObserver.observe(document.body,{childList:true,subtree:true});
 
 const languageSetupVersion='2';
 if(localStorage.getItem('ct_language_setup')!==languageSetupVersion){localStorage.setItem('ct_language','ka');localStorage.setItem('ct_language_setup',languageSetupVersion);}
