@@ -84,6 +84,8 @@ function applyLanguage(lang){
    el.placeholder=map[p]||p;
  });
 }
+const languageSetupVersion='2';
+if(localStorage.getItem('ct_language_setup')!==languageSetupVersion){localStorage.setItem('ct_language','ka');localStorage.setItem('ct_language_setup',languageSetupVersion);}
 const savedLanguage=localStorage.getItem('ct_language');
 const initialLanguage=['ka','ru','en'].includes(savedLanguage)?savedLanguage:'ka';
 languageSelect.value=initialLanguage;
