@@ -331,7 +331,8 @@ logoutButton.addEventListener('click', async () => {
  if(error) showDriverMessage('Ошибка выхода: '+error.message,true);
  else {logoutButton.classList.add('hidden');showDriverMessage('Вы вышли из аккаунта.');}
 });
-authClient.auth.onAuthStateChange(async (event, session) => {\n loadDriverApplications().catch(error => showAdminMessage(error.message,true));
+authClient.auth.onAuthStateChange(async (event, session) => {
+ loadDriverApplications().catch(error => showAdminMessage(error.message,true));
  loadDriverOrders().catch(error => { driverOrdersSection.classList.remove('hidden'); driverOrdersMessage.textContent=error.message; });
  if (event === 'SIGNED_IN' && session && session.user) {
   try { await ensureDriverProfile(session.user); }
