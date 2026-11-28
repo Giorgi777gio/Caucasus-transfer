@@ -1,7 +1,8 @@
 #EXTM3U
-# Caucasus Transfer — Georgia + Russian-language TV
-# Publicly listed streams; availability and regional restrictions can change.
-# Georgian channels
+# Caucasus Transfer — Georgia, Russian-language TV, sports and foreign movies
+# Public streams can change or be region-restricted.
+
+# 🇬🇪 Грузинские каналы
 #EXTINF:-1 tvg-id="1TV.ge@SD" group-title="🇬🇪 Грузинские каналы",1TV Georgia (720p)
 https://tv.cdn.xsg.ge/gpb-1tv/index.m3u8
 #EXTINF:-1 tvg-id="2TV.ge@SD" group-title="🇬🇪 Грузинские каналы",2TV Georgia (720p)
@@ -29,7 +30,7 @@ http://nue01-edge01.itdc.ge/pirvelitv/mpegts
 #EXTINF:-1 tvg-id="AbazaTV.ru@SD" group-title="🇬🇪 Грузинские каналы",Abaza TV
 https://public.apsny.camera/tv_abaza_tv_to_site/index.m3u8
 
-# Russian-language general channels
+# 🇷🇺 Русские каналы
 #EXTINF:-1 tvg-id="360.ru@SD" group-title="🇷🇺 Русские каналы",360°
 https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8
 #EXTINF:-1 tvg-id="ChannelOneCIS.ru@SD" group-title="🇷🇺 Русские каналы",Первый канал СНГ
@@ -48,14 +49,10 @@ http://flussonic.linkintel.ru/ren_tv/index.m3u8
 http://flussonic.linkintel.ru/sts/index.m3u8
 #EXTINF:-1 tvg-id="TNT.ru@SD" group-title="🇷🇺 Русские каналы",ТНТ
 http://flussonic.linkintel.ru/tnt/index.m3u8
-#EXTINF:-1 tvg-id="Carousel.ru@SD" group-title="🇷🇺 Русские каналы",Карусель
-https://stream.smotrim.ru/hls2/karusel/playlist_3.m3u8
-#EXTINF:-1 tvg-id="2x2.ru@SD" group-title="🇷🇺 Русские каналы",2x2
-http://s7.merlive.am/2x2/index.m3u8
 #EXTINF:-1 tvg-id="1HDMusicTelevision.ru@HD" group-title="🇷🇺 Русские каналы",1HD Music
 https://stream8.cinerama.uz/1267/tracks-v1a1/mono.m3u8
 
-# Russian-language movies and series
+# 🎬 Фильмы и сериалы на русском
 #EXTINF:-1 tvg-id="Cinema.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Cinema
 https://stream8.cinerama.uz/1227/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-id="Domkino.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Дом кино
@@ -70,79 +67,10 @@ http://s7.merlive.am/NTVSerial/index.m3u8
 http://176.118.197.101/MirSeriala/index.m3u8
 #EXTINF:-1 tvg-id="NTVHit.ru@SD" group-title="🎬 Фильмы и сериалы на русском",НТВ Хит
 http://s7.merlive.am/ntvxit/index.m3u8
-# Дополнительные русскоязычные каналы из публичного каталога iptv-org
-
-# 🎵 Русская музыка
-#EXTINF:-1 tvg-id="1HDMusicTelevision.ru@HD" group-title="🎵 Русская музыка",1HD Music Television (1080p)
-http://176.118.197.101/1HD/index.m3u8
-#EXTINF:-1 tvg-id="BRIDGE.ru@SD" group-title="🎵 Русская музыка",BRIDGE (576p)
-http://178.134.1.158:8081/BRIDGE/index.m3u8
-#EXTINF:-1 tvg-id="BRIDGEClassic.ru@SD" group-title="🎵 Русская музыка",BRIDGE Classic (576p)
-http://5.188.159.128:8070/Bridge_TV_Classic/index.m3u8
-#EXTINF:-1 tvg-id="BRIDGEDeluxe.ru@HD" group-title="🎵 Русская музыка",BRIDGE Deluxe HD (576p)
-http://stream.mcquack.net/92/index.m3u8
-#EXTINF:-1 tvg-id="BRIDGEHits.ru@SD" group-title="🎵 Русская музыка",BRIDGE Hits (576p)
-http://5.188.159.128:8070/Bridge_TV_Hits/index.m3u8
-#EXTINF:-1 tvg-id="BRIDGERock.ru@SD" group-title="🎵 Русская музыка",BRIDGE Rock (576p)
-http://178.134.1.158:8081/BRIDGEROCK/index.m3u8
-#EXTINF:-1 tvg-id="ClassicMusic.ru@SD" group-title="🎵 Русская музыка",Classic Music (1080p)
-http://stream.mcquack.net/312/index.m3u8
-#EXTINF:-1 tvg-id="DanceHits80.ru@SD" group-title="🎵 Русская музыка",DanceHits80
-http://dancehits80.denvs.ru:8080/index.m3u8
-#EXTINF:-1 tvg-id="EuropaPlusTV.ru@SD" group-title="🎵 Русская музыка",Europa Plus TV (576p)
-https://fs.uplink.kz/europa_plus/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="EuropaPlusTV.ru@Belarus" group-title="🎵 Русская музыка",Europa Plus TV Belarus (576p)
-http://46.53.200.153:7777/play/EuropaPlus/index.m3u8
-#EXTINF:-1 tvg-id="EuropaPlusTV.ru@SD" group-title="🎵 Русская музыка",Europa Plus TV SD (576p)
-http://stream.mcquack.net/184/index.m3u8
-#EXTINF:-1 tvg-id="FONMusic.ru@SD" group-title="🎵 Русская музыка",FON Music (576p)
-http://s7.merlive.am/TNTMusic/index.m3u8
-#EXTINF:-1 tvg-id="" group-title="🎵 Русская музыка",Fon Music (576p)
-http://stream.mcquack.net/317/index.m3u8
-#EXTINF:-1 tvg-id="FONTV.ru@HD" group-title="🎵 Русская музыка",FON TV (1080p)
-https://fonstreams.mediacdn.ru/stream/fontvclear/playlist.m3u8
-#EXTINF:-1 tvg-id="RUTV.ru@SD" group-title="🎵 Русская музыка",RU.TV (1080p)
-https://bl.rutube.ru/livestream/b1eb8e90d7e636677b3eb73b4fcbb717/index.m3u8?e=2069285076&s=d-E-bxKy2v3EEJ94RQX9CA&scheme=https
-#EXTINF:-1 tvg-id="RUTVKids.ru@SD" group-title="🎵 Русская музыка",RU.TV Kids (720p)
-https://rutvkids.ru/live/efir/index.m3u8
-#EXTINF:-1 tvg-id="RUTV.ru@SD" group-title="🎵 Русская музыка",RU.TV SD (576p)
-http://stream.mcquack.net/109/index.m3u8
-
-# 🧒 Детские каналы и мультфильмы
-#EXTINF:-1 tvg-id="2x2.ru@SD" group-title="🧒 Детские каналы и мультфильмы",2x2 SD (576p)
-http://stream.mcquack.net/187/index.m3u8
-#EXTINF:-1 tvg-id="BabyTime.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Baby Time (576p)
-http://178.134.1.158:8081/babytime/index.m3u8
-#EXTINF:-1 tvg-id="Carousel.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Carousel (1080p)
-http://s7.merlive.am/Karusel/index.m3u8
-#EXTINF:-1 tvg-id="CarouselInternational.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Carousel International (576p)
-https://fs.uplink.kz/karusel/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="Carousel.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Carousel SD (576p)
-http://stream.mcquack.net/120/index.m3u8
-#EXTINF:-1 tvg-id="CartoonClassics.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Cartoon Classics
-http://88.218.242.237:8001/Cartoon_Classics
-#EXTINF:-1 tvg-id="DaVinci.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Da Vinci (1080p)
-https://stream8.cinerama.uz/1231/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Detskimir.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Detski mir (576p)
-http://s7.merlive.am/DetskiMir/index.m3u8
-#EXTINF:-1 tvg-id="DetvoraPlus.ru@HD" group-title="🧒 Детские каналы и мультфильмы",Detvora+ (1080p)
-https://cdn.rostelekom-tv.xyz/live/WAYU4PTJ_VVz4wAQ.m3u8
-#EXTINF:-1 tvg-id="Mult.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Mult (576p)
-http://flussonic.linkintel.ru/Mult/index.m3u8
-#EXTINF:-1 tvg-id="Mult.ru@HD" group-title="🧒 Детские каналы и мультфильмы",Mult HD (576p)
-http://s7.merlive.am/Mult/index.m3u8
-#EXTINF:-1 tvg-id="Multimuzyka.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Mult i muzyka (576p)
-http://stream.mcquack.net/82/index.m3u8
-#EXTINF:-1 tvg-id="Mult.ru@International" group-title="🧒 Детские каналы и мультфильмы",Mult International (576p)
-https://fs.uplink.kz/mult/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="Multilandia.ru@SD" group-title="🧒 Детские каналы и мультфильмы",Multilandia (1080p)
-https://stream8.cinerama.uz/1440/tracks-v1a1/mono.m3u8
 
 # 📺 Русские развлекательные и познавательные
 #EXTINF:-1 tvg-id="360News.ru@SD" group-title="📺 Русские развлекательные и познавательные",360° Новости (1080p)
 https://edge-tv-ll.facecast.io/evacoder_hls_hi/UBZfFgtKB1JwTwoDERNQVGGs/index.m3u8
-#EXTINF:-1 tvg-id="365daysTV.ru@SD" group-title="📺 Русские развлекательные и познавательные",365 days TV (576p)
-http://stream.mcquack.net/70/index.m3u8
 #EXTINF:-1 tvg-id="AnimalPlanet.ru@SD" group-title="📺 Русские развлекательные и познавательные",Animal Planet (1080p)
 http://stream.mcquack.net/114/index.m3u8
 #EXTINF:-1 tvg-id="Arsenal.ru@SD" group-title="📺 Русские развлекательные и познавательные",Arsenal (576p)
@@ -159,16 +87,12 @@ http://88.212.15.50/live/test_bober/playlist.m3u8
 http://31.148.5.241/kanal_5/index.m3u8
 #EXTINF:-1 tvg-id="Channel5International.ru@SD" group-title="📺 Русские развлекательные и познавательные",Channel 5 International (576p)
 https://fs.uplink.kz/5_kanal/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="ChannelOneCIS.ru@SD" group-title="📺 Русские развлекательные и познавательные",Channel One CIS (576p)
-https://fs.uplink.kz/perviy_kanal_sng/mono.m3u8?token=onlinetv
 #EXTINF:-1 tvg-id="DiscoveryChannel.ru@SD" group-title="📺 Русские развлекательные и познавательные",Discovery Channel (1080p)
 http://stream.mcquack.net/177/index.m3u8
 #EXTINF:-1 tvg-id="Friday.ru@SD" group-title="📺 Русские развлекательные и познавательные",Friday! (576p)
 http://31.148.5.241/kanal_16/index.m3u8
 #EXTINF:-1 tvg-id="FridayInternational.ru@Kazakhstan" group-title="📺 Русские развлекательные и познавательные",Friday! International Kazakhstan (576p)
 https://fs.uplink.kz/bolshaya_pyatnica/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="Mir24.ru@SD" group-title="📺 Русские развлекательные и познавательные",Mir 24 (1080p)
-https://stream8.cinerama.uz/1219/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-id="Mir.ru@HD" group-title="📺 Русские развлекательные и познавательные",Mir HD (1080p) [Not 24/7]
 http://hls.mirtv.cdnvideo.ru/mirtv-parampublish/mirtv_2500/playlist.m3u8
 #EXTINF:-1 tvg-id="Mir.ru@Kazakhstan" group-title="📺 Русские развлекательные и познавательные",Mir Kazakhstan (576p)
@@ -183,8 +107,6 @@ http://5.188.159.128:8070/ntvmir_TV/index.m3u8
 http://45.153.24.78/NTV/index.m3u8
 #EXTINF:-1 tvg-id="NTVStilzhizn.ru@SD" group-title="📺 Русские развлекательные и познавательные",NTV Stil zhizn (576p)
 http://s7.merlive.am/ntvstil/index.m3u8
-#EXTINF:-1 tvg-id="NTVVitrina.ru@SD" group-title="📺 Русские развлекательные и познавательные",NTV Vitrina (720p)
-https://cdn.ntv.ru/vitrina/index.m3u8
 #EXTINF:-1 tvg-id="RENTV.ru@SD" group-title="📺 Русские развлекательные и познавательные",REN TV (576p)
 http://31.148.5.241/kanal_11/index.m3u8
 #EXTINF:-1 tvg-id="STS.ru@HD" group-title="📺 Русские развлекательные и познавательные",STS HD (1080p)
@@ -223,8 +145,6 @@ http://178.134.1.158:8081/red/index.m3u8
 http://s7.merlive.am/Sci-Fi/index.m3u8
 #EXTINF:-1 tvg-id="AmediaHit.ru@SD" group-title="🎬 Русское кино и сериалы",Amedia Hit (1080p)
 http://stream.mcquack.net/162/index.m3u8
-#EXTINF:-1 tvg-id="Domkino.ru@SD" group-title="🎬 Русское кино и сериалы",Dom kino (1080p)
-https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8
 #EXTINF:-1 tvg-id="Domkino.ru@International" group-title="🎬 Русское кино и сериалы",Dom kino International (576p)
 https://fs.uplink.kz/dom_kino/mono.m3u8?token=onlinetv
 #EXTINF:-1 tvg-id="DomkinoPremium.ru@SD" group-title="🎬 Русское кино и сериалы",Dom kino Premium (576p)
@@ -233,8 +153,6 @@ http://88.212.15.50/live/test_dom_kino_premium/playlist.m3u8
 http://stream.mcquack.net/108/index.m3u8
 #EXTINF:-1 tvg-id="Dorama.ru@SD" group-title="🎬 Русское кино и сериалы",Dorama (1080p)
 https://stream8.cinerama.uz/1273/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Evrokino.ru@SD" group-title="🎬 Русское кино и сериалы",Evrokino (576p)
-http://176.118.197.101/Evrokino/index.m3u8
 #EXTINF:-1 tvg-id="Evrokino.ru@HD" group-title="🎬 Русское кино и сериалы",Evrokino HD (1080p)
 http://stream.mcquack.net/385/index.m3u8
 #EXTINF:-1 tvg-id="Kinomix.ru@SD" group-title="🎬 Русское кино и сериалы",Kinomix (576p)
@@ -257,9 +175,65 @@ https://stream8.cinerama.uz/1203/tracks-v1a1/mono.m3u8
 http://s7.merlive.am/Kinoujas/index.m3u8
 #EXTINF:-1 tvg-id="Komedia.ru@SD" group-title="🎬 Русское кино и сериалы",Komedia (576p)
 http://176.118.197.101/Komediya/index.m3u8
-#EXTINF:-1 tvg-id="MirSeriala.ru@SD" group-title="🎬 Русское кино и сериалы",Mir Seriala (576p)
-http://176.118.197.101/MirSeriala/index.m3u8
-#EXTINF:-1 tvg-id="NTVSeries.ru@SD" group-title="🎬 Русское кино и сериалы",NTV Series (576p)
-http://s7.merlive.am/NTVSerial/index.m3u8
 #EXTINF:-1 tvg-id="NTVHit.ru@SD" group-title="🎬 Русское кино и сериалы",NTV-Hit (576p)
 http://178.134.1.158:8081/ntvhit/index.m3u8
+
+# ⚽ Спорт и MMA
+#EXTINF:-1 tvg-id="ExtremeSportsChannel.ru@SD" group-title="⚽ Спорт и MMA",Extreme Sports Channel (576p)
+http://46.32.176.50/extremesport/index.m3u8
+#EXTINF:-1 tvg-id="ExtremeSportsChannel.ru@SD" group-title="⚽ Спорт и MMA",Extreme Sports Channel (576p)
+https://fs.uplink.kz/extreme_sports/mono.m3u8?token=onlinetv
+#EXTINF:-1 tvg-id="MatchArena.ru@SD" group-title="⚽ Спорт и MMA",Match! Arena (576p)
+http://stream.mcquack.net/163/index.m3u8
+#EXTINF:-1 tvg-id="MatchBoets.ru@SD" group-title="⚽ Спорт и MMA",Match! Boets (576p)
+http://stream.mcquack.net/112/index.m3u8
+#EXTINF:-1 tvg-id="MatchIgra.ru@SD" group-title="⚽ Спорт и MMA",Match! Igra (576p)
+http://stream.mcquack.net/188/index.m3u8
+#EXTINF:-1 tvg-id="MatchPlaneta.ru@SD" group-title="⚽ Спорт и MMA",Match! Planeta (576p)
+https://fs.uplink.kz/match_planeta/mono.m3u8?token=onlinetv
+#EXTINF:-1 tvg-id="MatchPremier.ru@SD" group-title="⚽ Спорт и MMA",Match! Premier (576p)
+http://185.23.80.23:8080/MATCH_PREMIER/index.m3u8
+#EXTINF:-1 tvg-id="MatchPremier.ru@SD" group-title="⚽ Спорт и MMA",Match! Premier (576p)
+http://s7.merlive.am/matchpremier/index.m3u8
+#EXTINF:-1 tvg-id="MatchStrana.ru@SD" group-title="⚽ Спорт и MMA",Match! Strana (576p)
+http://s7.merlive.am/matchstrana/index.m3u8
+#EXTINF:-1 tvg-id="MatchStrana.ru@SD" group-title="⚽ Спорт и MMA",Match! Strana (576p)
+http://stream.mcquack.net/143/index.m3u8
+#EXTINF:-1 tvg-id="MatchStrana.ru@SD" group-title="⚽ Спорт и MMA",Match! Strana (576p)
+http://ukr.ukrainske.tv/134/keytvainua/video.m3u8
+#EXTINF:-1 tvg-id="MatchUltra.ru@4K" group-title="⚽ Спорт и MMA",Match! Ultra (1080p)
+http://31.148.5.241/kanal_3/index.m3u8
+#EXTINF:-1 tvg-id="MatchUltra.ru@4K" group-title="⚽ Спорт и MMA",Match! Ultra (720p)
+http://stream.mcquack.net/169/index.m3u8
+#EXTINF:-1 tvg-id="MatchUltra.ru@4K" group-title="⚽ Спорт и MMA",Match! Ultra (576p)
+http://45.132.87.69:8080/match/index.m3u8
+#EXTINF:-1 tvg-id="MatchUltra.ru@4K" group-title="⚽ Спорт и MMA",Match! Ultra (576p)
+http://flussonic.linkintel.ru/match/index.m3u8
+#EXTINF:-1 tvg-id="MatchUltra.ru@4K" group-title="⚽ Спорт и MMA",Match! Ultra (576p)
+http://tv.tuva.ru/machtv/index.m3u8
+#EXTINF:-1 tvg-id="MatchUltra.ru@4K" group-title="⚽ Спорт и MMA",Match! Ultra (576p)
+https://fs.uplink.kz/match/mono.m3u8?token=onlinetv
+#EXTINF:-1 tvg-id="MMATVcom.ru@SD" group-title="⚽ Спорт и MMA",MMA-TV.com (1080p)
+https://stream8.cinerama.uz/1226/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="MMATVcom.ru@SD" group-title="⚽ Спорт и MMA",MMA-TV.com (576p)
+https://fs.uplink.kz/mma/mono.m3u8?token=onlinetv
+#EXTINF:-1 tvg-id="OkkoPrajmSport.ru@SD" group-title="⚽ Спорт и MMA",Okko Prajm Sport (1080p)
+http://stream.mcquack.net/493/index.m3u8
+#EXTINF:-1 tvg-id="RussianExtremeUltra.ru@SD" group-title="⚽ Спорт и MMA",Russian Extreme Ultra (1440p)
+http://46.53.200.153:7777/play/test_krask1/index.m3u8
+#EXTINF:-1 tvg-id="Sportivnyy.ru@SD" group-title="⚽ Спорт и MMA",Sportivnyy (1080p)
+https://live-3.otcnet.ru/sportivny/index.m3u8
+#EXTINF:-1 tvg-id="vijuPlusSport.ru@SD" group-title="⚽ Спорт и MMA",viju+ Sport (1080p)
+https://stream8.cinerama.uz/1229/tracks-v1a1/mono.m3u8
+#EXTINF:-1 tvg-id="vijuPlusSport.ru@SD" group-title="⚽ Спорт и MMA",viju+ Sport (576p)
+http://31.148.5.241/Viasat_Sport/index.m3u8
+#EXTINF:-1 tvg-id="vijuPlusSport.ru@SD" group-title="⚽ Спорт и MMA",viju+ Sport (576p)
+http://46.53.200.153:7777/play/Viasat_Sport/index.m3u8
+#EXTINF:-1 tvg-id="vijuPlusSport.ru@SD" group-title="⚽ Спорт и MMA",viju+ Sport (576p)
+http://stream.mcquack.net/333/index.m3u8
+#EXTINF:-1 tvg-id="vijuPlusSport.ru@SD" group-title="⚽ Спорт и MMA",viju+ Sport (576p)
+https://fs.uplink.kz/viju_sport/mono.m3u8?token=onlinetv
+#EXTINF:-1 tvg-id="vijuPlusSport.ru@HD" group-title="⚽ Спорт и MMA",viju+ Sport HD (1080p)
+http://46.53.200.153:7777/play/a01l/index.m3u8
+#EXTINF:-1 tvg-id="AstrahanRuSport.ru@SD" group-title="⚽ Спорт и MMA",Астрахань.Ru Sport (720p)
+https://streaming.astrakhan.ru/astrakhanrusporthd/playlist.m3u8
