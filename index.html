@@ -204,8 +204,14 @@ async function loadDriverOrders() {
  const {data:myOffers,error:offersError}=await authClient.from('offers')
   .select('id,order_id,price,status,message,created_at').eq('driver_id',driver.id);
  if (offersError) {
-  availableOrdersBox.innerHTML='';
-  driverOrdersMessage.textContent='Заказы загружены, но таблица предложений ещё не настроена. Сначала выполните SQL-инструкцию supabase/driver-offers.sql в Supabase. Ошибка: '+offersError.message;
+  driverOrdersMessage.textContent='Заказы доступны, но отправка цен пока не настроена. Выполните SQL-инструкцию supabase/driver-offers.sql в Supabase. Ошибка: '+offersError.message;
+  availableOrdersBox.innerHTML=orders.map(o=>`<article class="vehicle-card" style="margin-top:12px">
+   <h3>${escapeHtml(o.from_location)} → ${escapeHtml(o.to_location)}</h3>
+   <p>Дата: ${escapeHtml(o.travel_date)} · Время: ${escapeHtml(o.travel_time)}</p>
+   <p>Пассажиры: ${escapeHtml(o.passengers)} · Автомобиль: ${escapeHtml(o.vehicle)}</p>
+   <p>Цена клиента: ${o.price==null?'Ожидает предложений':escapeHtml(o.price)+' ₾'}</p>
+   <p>Пожелания: ${escapeHtml(o.notes || 'нет')}</p>
+  </article>`).join('');
   return;
  }
  const offerByOrder=new Map((myOffers||[]).map(x=>[String(x.order_id),x]));
