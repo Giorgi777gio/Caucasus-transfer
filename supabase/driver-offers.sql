@@ -1,4 +1,16 @@
 -- Caucasus Transfer: driver price offers
+-- Keep the fields used by the current driver login/approval flow present.
+alter table public.drivers
+  add column if not exists user_id uuid references auth.users(id) on delete cascade,
+  add column if not exists approved boolean not null default false;
+
+create unique index if not exists drivers_user_id_unique
+  on public.drivers(user_id)
+  where user_id is not null;
+
+alter table public.orders
+  add column if not exists assigned_at timestamptz;
+
 -- Run this script in Supabase SQL Editor after confirming the current drivers/orders schema.
 
 create table if not exists public.offers (
