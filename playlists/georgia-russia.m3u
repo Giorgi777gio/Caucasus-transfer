@@ -1,7 +1,6 @@
 #EXTM3U
 # Caucasus Transfer — Georgia, Russian-language TV, sports and foreign movies
 # Public streams can change or be region-restricted.
-
 # 🇬🇪 Грузинские каналы
 #EXTINF:-1 tvg-id="1TV.ge@SD" group-title="🇬🇪 Грузинские каналы",1TV Georgia (720p)
 https://tv.cdn.xsg.ge/gpb-1tv/index.m3u8
@@ -29,7 +28,6 @@ http://nue01-edge01.itdc.ge/rustavi2hqnew/mpegts
 http://nue01-edge01.itdc.ge/pirvelitv/mpegts
 #EXTINF:-1 tvg-id="AbazaTV.ru@SD" group-title="🇬🇪 Грузинские каналы",Abaza TV
 https://public.apsny.camera/tv_abaza_tv_to_site/index.m3u8
-
 # 🇷🇺 Русские каналы
 #EXTINF:-1 tvg-id="360.ru@SD" group-title="🇷🇺 Русские каналы",360°
 https://cdn-evacoder-tv.facecast.io/evacoder_hls_hi/CkxfR1xNUAJwTgtXTBZTAJli/index.m3u8
@@ -51,24 +49,7 @@ http://flussonic.linkintel.ru/sts/index.m3u8
 http://flussonic.linkintel.ru/tnt/index.m3u8
 #EXTINF:-1 tvg-id="1HDMusicTelevision.ru@HD" group-title="🇷🇺 Русские каналы",1HD Music
 https://stream8.cinerama.uz/1267/tracks-v1a1/mono.m3u8
-
 # 🎬 Фильмы и сериалы на русском
-#EXTINF:-1 tvg-id="Cinema.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Cinema
-https://stream8.cinerama.uz/1227/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Domkino.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Дом кино
-https://stream8.cinerama.uz/1054/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Evrokino.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Еврокино
-http://176.118.197.101/Evrokino/index.m3u8
-#EXTINF:-1 tvg-id="365daysTV.ru@SD" group-title="🎬 Фильмы и сериалы на русском",365 дней ТВ
-http://stream.mcquack.net/70/index.m3u8
-#EXTINF:-1 tvg-id="NTVSeries.ru@SD" group-title="🎬 Фильмы и сериалы на русском",НТВ Сериал
-http://s7.merlive.am/NTVSerial/index.m3u8
-#EXTINF:-1 tvg-id="MirSeriala.ru@SD" group-title="🎬 Фильмы и сериалы на русском",Мир сериала
-http://176.118.197.101/MirSeriala/index.m3u8
-#EXTINF:-1 tvg-id="NTVHit.ru@SD" group-title="🎬 Фильмы и сериалы на русском",НТВ Хит
-http://s7.merlive.am/ntvxit/index.m3u8
-
-# 📺 Русские развлекательные и познавательные
 #EXTINF:-1 tvg-id="360News.ru@SD" group-title="📺 Русские развлекательные и познавательные",360° Новости (1080p)
 https://edge-tv-ll.facecast.io/evacoder_hls_hi/UBZfFgtKB1JwTwoDERNQVGGs/index.m3u8
 #EXTINF:-1 tvg-id="AnimalPlanet.ru@SD" group-title="📺 Русские развлекательные и познавательные",Animal Planet (1080p)
@@ -133,51 +114,31 @@ http://51.158.144.33:2021/zvezda/index.m3u8
 http://s7.merlive.am/Zvezda/index.m3u8
 #EXTINF:-1 tvg-id="Zvezda.ru@HD" group-title="📺 Русские развлекательные и познавательные",Zvezda HD (1080p) [Not 24/7]
 https://tvchannelstream1.tvzvezda.ru/cdn/tvzvezda/playlist.m3u8
-
 # 🎬 Русское кино и сериалы
-#EXTINF:-1 tvg-id="black.ru@SD" group-title="🎬 Русское кино и сериалы",.black (576p)
+#EXTINF:-1 tvg-id="black.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",.black (576p)
 http://stream.mcquack.net/263/index.m3u8
-#EXTINF:-1 tvg-id="red.ru@SD" group-title="🎬 Русское кино и сериалы",.red (576p)
+#EXTINF:-1 tvg-id="red.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",.red (576p)
 http://5.188.159.128:8070/RED/index.m3u8
-#EXTINF:-1 tvg-id="red.ru@HD" group-title="🎬 Русское кино и сериалы",.red HD (1080p)
+#EXTINF:-1 tvg-id="red.ru@HD" group-title="🎬 Зарубежное кино (русская озвучка)",.red HD (1080p)
 http://178.134.1.158:8081/red/index.m3u8
-#EXTINF:-1 tvg-id="scifi.ru@SD" group-title="🎬 Русское кино и сериалы",.sci-fi (576p)
+#EXTINF:-1 tvg-id="scifi.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",.sci-fi (576p)
 http://s7.merlive.am/Sci-Fi/index.m3u8
-#EXTINF:-1 tvg-id="AmediaHit.ru@SD" group-title="🎬 Русское кино и сериалы",Amedia Hit (1080p)
-http://stream.mcquack.net/162/index.m3u8
-#EXTINF:-1 tvg-id="Domkino.ru@International" group-title="🎬 Русское кино и сериалы",Dom kino International (576p)
-https://fs.uplink.kz/dom_kino/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="DomkinoPremium.ru@SD" group-title="🎬 Русское кино и сериалы",Dom kino Premium (576p)
-http://88.212.15.50/live/test_dom_kino_premium/playlist.m3u8
-#EXTINF:-1 tvg-id="DomkinoPremium.ru@HD" group-title="🎬 Русское кино и сериалы",Dom kino Premium HD (1080p)
-http://stream.mcquack.net/108/index.m3u8
-#EXTINF:-1 tvg-id="Dorama.ru@SD" group-title="🎬 Русское кино и сериалы",Dorama (1080p)
+#EXTINF:-1 tvg-id="Dorama.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",Dorama (1080p)
 https://stream8.cinerama.uz/1273/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Evrokino.ru@HD" group-title="🎬 Русское кино и сериалы",Evrokino HD (1080p)
+#EXTINF:-1 tvg-id="Evrokino.ru@HD" group-title="🎬 Зарубежное кино (русская озвучка)",Evrokino HD (1080p)
 http://stream.mcquack.net/385/index.m3u8
-#EXTINF:-1 tvg-id="Kinomix.ru@SD" group-title="🎬 Русское кино и сериалы",Kinomix (576p)
+#EXTINF:-1 tvg-id="Kinomix.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",Kinomix (576p)
 http://93.170.254.17/Kinomiks/index.m3u8
-#EXTINF:-1 tvg-id="Kinomix.ru@HD" group-title="🎬 Русское кино и сериалы",Kinomix HD (1080p)
+#EXTINF:-1 tvg-id="Kinomix.ru@HD" group-title="🎬 Зарубежное кино (русская озвучка)",Kinomix HD (1080p)
 http://s7.merlive.am/Kinomix/index.m3u8
-#EXTINF:-1 tvg-id="Kinopokaz.ru@SD" group-title="🎬 Русское кино и сериалы",Kinopokaz (1080p)
+#EXTINF:-1 tvg-id="Kinopokaz.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",Kinopokaz (1080p)
 https://stream8.cinerama.uz/1057/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Kinopremyera.ru@SD" group-title="🎬 Русское кино и сериалы",Kinopremyera (1080p)
+#EXTINF:-1 tvg-id="Kinopremyera.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",Kinopremyera (1080p)
 http://5.188.159.128:8070/KINOPREMIERA/index.m3u8
-#EXTINF:-1 tvg-id="Kinopremyera.ru@HD" group-title="🎬 Русское кино и сериалы",Kinopremyera HD (1080p)
+#EXTINF:-1 tvg-id="Kinopremyera.ru@HD" group-title="🎬 Зарубежное кино (русская озвучка)",Kinopremyera HD (1080p)
 https://fs.uplink.kz/kinopremiera_hd/mono.m3u8?token=onlinetv
-#EXTINF:-1 tvg-id="Kinosemja.ru@SD" group-title="🎬 Русское кино и сериалы",Kinosemja (576p)
-http://s7.merlive.am/Kinosemya/index.m3u8
-#EXTINF:-1 tvg-id="Kinoseriya.ru@SD" group-title="🎬 Русское кино и сериалы",Kinoseriya (576p)
-http://s7.merlive.am/Kinoseria/index.m3u8
-#EXTINF:-1 tvg-id="Kinosvidanie.ru@SD" group-title="🎬 Русское кино и сериалы",Kinosvidanie (1080p)
-https://stream8.cinerama.uz/1203/tracks-v1a1/mono.m3u8
-#EXTINF:-1 tvg-id="Kinouzhas.ru@SD" group-title="🎬 Русское кино и сериалы",Kinouzhas (1080p)
+#EXTINF:-1 tvg-id="Kinouzhas.ru@SD" group-title="🎬 Зарубежное кино (русская озвучка)",Kinouzhas (1080p)
 http://s7.merlive.am/Kinoujas/index.m3u8
-#EXTINF:-1 tvg-id="Komedia.ru@SD" group-title="🎬 Русское кино и сериалы",Komedia (576p)
-http://176.118.197.101/Komediya/index.m3u8
-#EXTINF:-1 tvg-id="NTVHit.ru@SD" group-title="🎬 Русское кино и сериалы",NTV-Hit (576p)
-http://178.134.1.158:8081/ntvhit/index.m3u8
-
 # ⚽ Спорт и MMA
 #EXTINF:-1 tvg-id="ExtremeSportsChannel.ru@SD" group-title="⚽ Спорт и MMA",Extreme Sports Channel (576p)
 http://46.32.176.50/extremesport/index.m3u8
