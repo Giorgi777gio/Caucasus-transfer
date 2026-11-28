@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<rect width="512" height="512" rx="112" fill="#10283d"/>
+<path d="M92 330c72-112 136-154 210-154 47 0 83 18 118 51" fill="none" stroke="#e7b85c" stroke-width="24" stroke-linecap="round"/>
+<path d="M369 174l55 53-70 15" fill="none" stroke="#e7b85c" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M112 350h288" stroke="#d8e5ec" stroke-width="18" stroke-linecap="round"/>
+<text x="256" y="300" text-anchor="middle" font-family="Arial,sans-serif" font-size="124" font-weight="800" fill="#ffffff">CT</text>
+</svg>
